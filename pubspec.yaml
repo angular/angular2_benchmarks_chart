@@ -1,0 +1,13 @@
+name: angular2_benchmarks_chart
+version: 0.0.1
+description: Chart angular2 macro benchmarks.
+author: Dart Team <misc@dartlang.org>
+homepage: https://github.com/dart-lang/angular2_benchmarks_chart
+
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+
+dependencies:
+  charted: any
+  path: any
+  observe: any
