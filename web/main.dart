@@ -14,16 +14,16 @@ Iterable _columns = [
   new ChartColumnSpec(label: 'dart2js Runtime (ms)')
 ];
 
-Set<String> treeBenchmarks = new Set.from([
-  'baseline.tree.create',
-  'baseline.tree.update',
-  'ng2.tree.create.plain',
-  'ng2.tree.create.viewcache',
-  'ng2.tree.update'
+Set<String> treeBenchmarks = new Set.from(
+    ['ng2.tree.create.plain', 'ng2.tree.create.viewcache', 'ng2.tree.update']);
+
+Set<String> staticTreeBenchmarks = new Set.from([
+  'ng2.static.tree.create.plain',
+  'ng2.static.tree.create.viewcache',
+  'ng2.static.tree.update'
 ]);
 
 Set<String> largetableBenchmarks = new Set.from([
-  'baseline.largetable',
   'ng2.largetable.interpolation',
   'ng2.largetable.interpolationAttr',
   'ng2.largetable.interpolationFn'
@@ -57,12 +57,14 @@ main() {
 
 void showCharts() {
   renderChart('#tree_chart', treeBenchmarks);
+  renderChart('#static_tree_chart', staticTreeBenchmarks);
   renderChart('#largetable_chart', largetableBenchmarks);
   renderChart('#naive_infinite_scroll_chart', naiveInfiniteScrollBenchmarks);
 }
 
 void showMeans() {
   var treeMean = showMean('tree', treeBenchmarks);
+  var staticTreeMean = showMean('static_tree', staticTreeBenchmarks);
   var largeTableMean = showMean('largetable', largetableBenchmarks);
   var naiveInfiniteScrollMean =
       showMean('naive_infinite_scroll', naiveInfiniteScrollBenchmarks);
@@ -70,11 +72,13 @@ void showMeans() {
       'all macro',
       treeBenchmarks
           .union(largetableBenchmarks)
-          .union(naiveInfiniteScrollBenchmarks));
+          .union(naiveInfiniteScrollBenchmarks)
+          .union(staticTreeBenchmarks));
 
   var meansDiv = querySelector('#means');
   meansDiv.append(new UListElement()
     ..append(new LIElement()..text = treeMean)
+    ..append(new LIElement()..text = staticTreeMean)
     ..append(new LIElement()..text = largeTableMean)
     ..append(new LIElement()..text = naiveInfiniteScrollMean)
     ..append(new LIElement()..text = totalMean));

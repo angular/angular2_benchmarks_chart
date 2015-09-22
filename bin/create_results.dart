@@ -27,9 +27,7 @@ main(List<String> args) async {
         : 'dart2js';
     var score = getScore(results['validSample']);
     scores[target].add({'benchmark': benchmark, 'score': score});
-    print('during');
   }, onDone: () {
-    print('after');
     new File('results.json').writeAsString(JSON.encode(scores));
   });
 }
